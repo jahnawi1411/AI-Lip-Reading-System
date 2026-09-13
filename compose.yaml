@@ -1,0 +1,32 @@
+services:
+  database:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: visionspeak
+      POSTGRES_USER: visionspeak
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set a database password in .env}
+    volumes:
+      - database-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U visionspeak -d visionspeak"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  web:
+    build: .
+    environment:
+      VISIONSPEAK_ENV: production
+      VISIONSPEAK_API_TOKEN: ${VISIONSPEAK_API_TOKEN:?Set a random API token in .env}
+      VISIONSPEAK_SECRET_KEY: ${VISIONSPEAK_SECRET_KEY:?Set a random signing key in .env}
+      DATABASE_URL: postgresql+psycopg://visionspeak:${POSTGRES_PASSWORD}@database:5432/visionspeak
+      PORT: 8080
+    ports:
+      - "127.0.0.1:8080:8080"
+    depends_on:
+      database:
+        condition: service_healthy
+    mem_limit: 4g
+    cpus: 2
+    restart: unless-stopped
+volumes:
+  database-data:

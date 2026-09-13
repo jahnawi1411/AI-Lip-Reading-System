@@ -1,0 +1,107 @@
+{
+  "purpose": "public regression only; not held-out accuracy or training data",
+  "source_revision": "bec592aa1e66378bc7ab33f6110f1c8a431b3b9a",
+  "speaker_identity_verified": false,
+  "training_overlap": "unknown",
+  "samples": [
+    {
+      "video": "bbaf2n.mpg",
+      "text": "bin blue at f two now",
+      "mode": "grid",
+      "speaker": "unverified",
+      "label_source": "GRID filename sentence code",
+      "url": "https://raw.githubusercontent.com/rizkiarm/LipNet/bec592aa1e66378bc7ab33f6110f1c8a431b3b9a/evaluation/samples/GRID/bbaf2n.mpg",
+      "sha256": "e468120039e208b5ff9b9e269f8dc96bbddc45701f8dddcf2c0ae21abc0df546"
+    },
+    {
+      "video": "brbk7n.mpg",
+      "text": "bin red by k seven now",
+      "mode": "grid",
+      "speaker": "unverified",
+      "label_source": "GRID filename sentence code",
+      "url": "https://raw.githubusercontent.com/rizkiarm/LipNet/bec592aa1e66378bc7ab33f6110f1c8a431b3b9a/evaluation/samples/GRID/brbk7n.mpg",
+      "sha256": "2122707c6dd3b59a32b5272870afb37397dc6b20cf52241cf8ff7cfda7b3efa3"
+    },
+    {
+      "video": "lbax4n.mpg",
+      "text": "lay blue at x four now",
+      "mode": "grid",
+      "speaker": "unverified",
+      "label_source": "GRID filename sentence code",
+      "url": "https://raw.githubusercontent.com/rizkiarm/LipNet/bec592aa1e66378bc7ab33f6110f1c8a431b3b9a/evaluation/samples/GRID/lbax4n.mpg",
+      "sha256": "8f80c8ced6a8cb47d55c5c01704d4669b410369af653f6be7fbda9003337dedf"
+    },
+    {
+      "video": "lbbc2a.mpg",
+      "text": "lay blue by c two again",
+      "mode": "grid",
+      "speaker": "unverified",
+      "label_source": "GRID filename sentence code",
+      "url": "https://raw.githubusercontent.com/rizkiarm/LipNet/bec592aa1e66378bc7ab33f6110f1c8a431b3b9a/evaluation/samples/GRID/lbbc2a.mpg",
+      "sha256": "9447e5e0732eeaf4444b5ba1e3412c8a9e194975ba7c814fa64c4c41c83d4e4c"
+    },
+    {
+      "video": "lrwp9a.mpg",
+      "text": "lay red with p nine again",
+      "mode": "grid",
+      "speaker": "unverified",
+      "label_source": "GRID filename sentence code",
+      "url": "https://raw.githubusercontent.com/rizkiarm/LipNet/bec592aa1e66378bc7ab33f6110f1c8a431b3b9a/evaluation/samples/GRID/lrwp9a.mpg",
+      "sha256": "1a6c86fc5e7d4e9ee66a891f188f9a648c9b8be3bdc2431d73ac7e533aa70b3f"
+    },
+    {
+      "video": "lwbsza.mpg",
+      "text": "lay white by s zero again",
+      "mode": "grid",
+      "speaker": "unverified",
+      "label_source": "GRID filename sentence code",
+      "url": "https://raw.githubusercontent.com/rizkiarm/LipNet/bec592aa1e66378bc7ab33f6110f1c8a431b3b9a/evaluation/samples/GRID/lwbsza.mpg",
+      "sha256": "09090d1f7a8a946233a015a1b4258fafcb790ed6dbbd884ed88ae51fe36841a0"
+    },
+    {
+      "video": "pwij3p.mpg",
+      "text": "place white in j three please",
+      "mode": "grid",
+      "speaker": "unverified",
+      "label_source": "GRID filename sentence code",
+      "url": "https://raw.githubusercontent.com/rizkiarm/LipNet/bec592aa1e66378bc7ab33f6110f1c8a431b3b9a/evaluation/samples/GRID/pwij3p.mpg",
+      "sha256": "a610d98c101dde3587cc66d70cb569d3b1d0111cfad90bd0037e47e21316beda"
+    },
+    {
+      "video": "sbia1a.mpg",
+      "text": "set blue in a one again",
+      "mode": "grid",
+      "speaker": "unverified",
+      "label_source": "GRID filename sentence code",
+      "url": "https://raw.githubusercontent.com/rizkiarm/LipNet/bec592aa1e66378bc7ab33f6110f1c8a431b3b9a/evaluation/samples/GRID/sbia1a.mpg",
+      "sha256": "768e49272122f1577839db576ea00146d08e83d778c7fe8b9ca1b194dff57c7d"
+    },
+    {
+      "video": "sbwe5n.mpg",
+      "text": "set blue with e five now",
+      "mode": "grid",
+      "speaker": "unverified",
+      "label_source": "GRID filename sentence code",
+      "url": "https://raw.githubusercontent.com/rizkiarm/LipNet/bec592aa1e66378bc7ab33f6110f1c8a431b3b9a/evaluation/samples/GRID/sbwe5n.mpg",
+      "sha256": "6707e709f1d713a6ff6673c85605e2fa721cfe59749c56b9f34e6d159c5fdf55"
+    },
+    {
+      "video": "swiz3n.mpg",
+      "text": "set white in z three now",
+      "mode": "grid",
+      "speaker": "unverified",
+      "label_source": "GRID filename sentence code",
+      "url": "https://raw.githubusercontent.com/rizkiarm/LipNet/bec592aa1e66378bc7ab33f6110f1c8a431b3b9a/evaluation/samples/GRID/swiz3n.mpg",
+      "sha256": "080f3e1511879a3baa41cdc31aa7029981f29c71434a570de3d52ee78f9e5dd0"
+    },
+    {
+      "video": "id2_vcd_swwp2s.mpg",
+      "text": "set white with p two soon",
+      "mode": "grid",
+      "speaker": "unverified",
+      "label_source": "swwp2s.align",
+      "url": "https://raw.githubusercontent.com/rizkiarm/LipNet/bec592aa1e66378bc7ab33f6110f1c8a431b3b9a/evaluation/samples/id2_vcd_swwp2s.mpg",
+      "sha256": "3bb8cffd51399caaf0c97abcd32bcab3493b2878ffda73bd648490ea47c75cc0"
+    }
+  ]
+}

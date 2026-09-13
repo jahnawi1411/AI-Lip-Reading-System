@@ -1,0 +1,2 @@
+# Complete application runtime (the exploratory notebook is not a runtime dependency).
+-r requirements-server.txt

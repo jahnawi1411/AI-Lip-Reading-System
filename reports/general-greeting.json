@@ -1,0 +1,64 @@
+{
+  "text": "HI I AM JENNIFER",
+  "usable_text": "HI I AM JENNIFER",
+  "status": "decoded",
+  "engine": "auto-avsr",
+  "domain": "English sentences (experimental)",
+  "audio_used": false,
+  "review_required": true,
+  "confidence": null,
+  "model_score": null,
+  "confidence_status": "uncalibrated",
+  "weights_sha256": "fbf7cd70ff1c0e694b3030fb779dbb4570f04e4b841d62f9296c229e94878ddb",
+  "model_revision": "182b62837773ab01052d4ac21ef1d2203ea7d267",
+  "message": "Experimental visual-only English candidate. Review every word, especially names.",
+  "decoder": "hybrid_ctc_attention",
+  "beam_size": 10,
+  "input_report": {
+    "preprocessing": "auto-avsr-tasks-alignment-v1",
+    "frames": 137,
+    "source_fps": 16.758758880320602,
+    "target_fps": 25,
+    "duration_seconds": 5.4896666666666665,
+    "start_seconds": 0.0,
+    "audio_used": false,
+    "input_quality": {
+      "assessment": "advisory",
+      "thresholds_calibrated": false,
+      "mean_brightness": 142.00274658203125,
+      "mean_contrast": 42.39238739013672,
+      "median_laplacian_variance": 73.56355285644531,
+      "mean_frame_change": 3.185058832168579,
+      "warnings": [],
+      "note": "Image heuristics only. Motion may come from the camera; sharpness varies with resolution. These values do not measure speech accuracy."
+    },
+    "warnings": [
+      "Face Landmarker anchors replace the upstream face detector; this adaptation needs representative evaluation."
+    ]
+  },
+  "input_quality": {
+    "assessment": "advisory",
+    "thresholds_calibrated": false,
+    "mean_brightness": 142.00274658203125,
+    "mean_contrast": 42.39238739013672,
+    "median_laplacian_variance": 73.56355285644531,
+    "mean_frame_change": 3.185058832168579,
+    "warnings": [],
+    "note": "Image heuristics only. Motion may come from the camera; sharpness varies with resolution. These values do not measure speech accuracy."
+  },
+  "warnings": [
+    "Face Landmarker anchors replace the upstream face detector; this adaptation needs representative evaluation.",
+    "General-speech accuracy has not been established on this application."
+  ],
+  "elapsed_seconds": 10.516603300000043,
+  "evaluation": {
+    "word_errors": 1,
+    "reference_words": 4,
+    "character_errors": 6,
+    "reference_characters": 15,
+    "exact_match": false,
+    "reference": "Hi I am Jahnawi",
+    "wer": 0.25,
+    "cer": 0.4
+  }
+}

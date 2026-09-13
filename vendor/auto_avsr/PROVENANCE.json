@@ -1,0 +1,145 @@
+{
+  "revision": "182b62837773ab01052d4ac21ef1d2203ea7d267",
+  "files": [
+    {
+      "path": "LICENSE",
+      "git_blob": "4d4157dcd9bd0ebec82651ecf60ae6809f473717",
+      "sha256": "cc79c028bb1e288cd290b1b43bbdc0c66c2b159b536120914627956f00560f90"
+    },
+    {
+      "path": "README.md",
+      "git_blob": "91bb486b91589231b7f9bf3a1b1e0dccbef150d2",
+      "sha256": "620caafe9d1aa5fd2b47ae88b672420f045e5c460341ef1f68256c8b86b97908"
+    },
+    {
+      "path": "espnet/nets/batch_beam_search.py",
+      "git_blob": "ce71fe99559602905a62bd9ca78b5827917cea79",
+      "sha256": "4d319866d432a94f68969cb46a3569f7b9f99abd9c6df9eb1d53f68a1467ff6e"
+    },
+    {
+      "path": "espnet/nets/beam_search.py",
+      "git_blob": "6047649d25e14e7e1d425149d768910f96ca3750",
+      "sha256": "600a9434bdcf44312de002ac509e55ca936ede6df270b49f2887299cc29df2df"
+    },
+    {
+      "path": "espnet/nets/ctc_prefix_score.py",
+      "git_blob": "ea30ae615fdc6d3b7763c09ff57fc7d88ff117f4",
+      "sha256": "c26e5ce6f4884cfbf329e3bd8ac75089a47e4a4e79355db024dc0056b48da6c9"
+    },
+    {
+      "path": "espnet/nets/e2e_asr_common.py",
+      "git_blob": "ade73bbd74ffe70c26a70ebec147d6445952f0b8",
+      "sha256": "e24670378092040db8bded6a9383f9d2859fc5d6db5946f7409e4df5b23278ff"
+    },
+    {
+      "path": "espnet/nets/pytorch_backend/ctc.py",
+      "git_blob": "867e27558ef37a4e991133b011d44b1ce6c1f02b",
+      "sha256": "39c589343af0943663029e8d68e04ef04642e2b38d7499d052b860ddcf2ecee0"
+    },
+    {
+      "path": "espnet/nets/pytorch_backend/decoder/transformer_decoder.py",
+      "git_blob": "cf3b5cc5d859806be133db7eee80022d70d3a8e0",
+      "sha256": "3c9c8745dd33e440ecd34eb3903d559d6f5213e52e89598713d3dad56fc5d762"
+    },
+    {
+      "path": "espnet/nets/pytorch_backend/e2e_asr_conformer.py",
+      "git_blob": "85b2c26d5d139d3fce097b7004cbc1b8cfbe949a",
+      "sha256": "144c68cb2e696eb3735617770f21c9c0fe7e0e359cac77ae05a17dec5c0095b7"
+    },
+    {
+      "path": "espnet/nets/pytorch_backend/encoder/conformer_encoder.py",
+      "git_blob": "43bba104ae957368fd429c049745119a54226e83",
+      "sha256": "ed595f814ebba45b1e2853555c85b0bb197ed2e14e8b730c6b1368b384a8e790"
+    },
+    {
+      "path": "espnet/nets/pytorch_backend/frontend/resnet.py",
+      "git_blob": "826f8ed07fea1d8de81d730b8d843b5f7c4aa21a",
+      "sha256": "4097c6ff8675ec76bcf74e3290d1fe06b5e536f194a2784ccdd4b81029afbbfb"
+    },
+    {
+      "path": "espnet/nets/pytorch_backend/frontend/resnet1d.py",
+      "git_blob": "65dff237488ebd562b7576a9d349165359f8c875",
+      "sha256": "2b3d1e4cd68ea9ccce5813689234e7e95e6cb327181ca1335c6d63058da13a18"
+    },
+    {
+      "path": "espnet/nets/pytorch_backend/nets_utils.py",
+      "git_blob": "cb9e921d57924672a09cc5d08b828fdc6a8e7702",
+      "sha256": "34f0c4ef9f19f7e9526f0436a508371a0e68b6c4bebb687ca6372cf1d2ab638d"
+    },
+    {
+      "path": "espnet/nets/pytorch_backend/transformer/__init__.py",
+      "git_blob": "b7f177368e62a5578b8706300e101f831a3972ac",
+      "sha256": "aba1b9ff25a1b69d8a6905e7ed877205b5b8af6f3d1d9e82bb28b8aaed9aaeee"
+    },
+    {
+      "path": "espnet/nets/pytorch_backend/transformer/add_sos_eos.py",
+      "git_blob": "c550c5e58bc4525d7890b63b2b723e9495329016",
+      "sha256": "e73c11b60af9a67467bde1e53b031d43ccd00cd55e5f85813c4e6d757114c7ce"
+    },
+    {
+      "path": "espnet/nets/pytorch_backend/transformer/attention.py",
+      "git_blob": "277eccd4d25ad71808bf5a73abaa3a1f1f22ad35",
+      "sha256": "ed4cf0a1bbb9551f66586338ea19d6e5cc12fd897b989fbd51a0d9a11304ed6d"
+    },
+    {
+      "path": "espnet/nets/pytorch_backend/transformer/embedding.py",
+      "git_blob": "633d071ce4ea021ad454b7a48d1b1eb26b2debea",
+      "sha256": "08157dc9be6e1363653c8689af94ec51f82b56a7acf8cea46711b009ca8c491c"
+    },
+    {
+      "path": "espnet/nets/pytorch_backend/transformer/label_smoothing_loss.py",
+      "git_blob": "0d8b30338a778da9ba27870d51db24afd10d9b24",
+      "sha256": "70f6a14a1f8749c1dfa39a96469d9633246856572d2140cddd0378857598e265"
+    },
+    {
+      "path": "espnet/nets/pytorch_backend/transformer/layer_norm.py",
+      "git_blob": "db8be30ff70554edb179109037665e51c04510ec",
+      "sha256": "9685ea76896c4624ebd0db5afc2e7b7b77a1f467ae33ca0bd8876c802d46beb3"
+    },
+    {
+      "path": "espnet/nets/pytorch_backend/transformer/mask.py",
+      "git_blob": "68716387ce98d0a8623e47c27428967776261218",
+      "sha256": "dbc6b6d7e1449404c7463ce3a89a193f9c0c9a57e381b32572821af3ba1f9275"
+    },
+    {
+      "path": "espnet/nets/pytorch_backend/transformer/positionwise_feed_forward.py",
+      "git_blob": "219679209c2c4ab8ac71bbaf174bb21db65499dc",
+      "sha256": "c4db61e228ba3c55158d20ce53a1d5ec13e87a34148d38164230d4ac93d506b2"
+    },
+    {
+      "path": "espnet/nets/pytorch_backend/transformer/repeat.py",
+      "git_blob": "75904fea16ffbe136269a7cb5909e355e61e03a2",
+      "sha256": "a441c579cc57d25721ecf59ec357a0ab64e68abddadc4b955bc4fa01f643f0f8"
+    },
+    {
+      "path": "espnet/nets/scorer_interface.py",
+      "git_blob": "fb3a09fa676539b27e063cb567ebe3fd4d7ee509",
+      "sha256": "bfb21dd5b99f892fa9880764a47032729735bce3dd3b143d396e13ce1f31fc27"
+    },
+    {
+      "path": "espnet/nets/scorers/__init__.py",
+      "git_blob": "b7f177368e62a5578b8706300e101f831a3972ac",
+      "sha256": "aba1b9ff25a1b69d8a6905e7ed877205b5b8af6f3d1d9e82bb28b8aaed9aaeee"
+    },
+    {
+      "path": "espnet/nets/scorers/ctc.py",
+      "git_blob": "74c3385ff029333a29f929a6fd832d28781d3629",
+      "sha256": "556c10c796866c703398bcbc72dcf7d7557fe781431e8efc44f62d69c853a4fe"
+    },
+    {
+      "path": "espnet/nets/scorers/length_bonus.py",
+      "git_blob": "490ea84db4c66e83022e3fc45c3709c1b9e10335",
+      "sha256": "8c0aea891ef3aca25387acfafedbbec4210938cd3f9df14323eeb9fd36af9f78"
+    },
+    {
+      "path": "preparation/detectors/mediapipe/20words_mean_face.npy",
+      "git_blob": "b659613a07eedaccccaf1c29d8ff65e4636aebb6",
+      "sha256": "dbf68b2044171e1160716df7c53e8bbfaa0ee8c61fb41171d04cb6092bb81422"
+    },
+    {
+      "path": "spm/unigram/unigram5000_units.txt",
+      "git_blob": "1b5c74fc7cfded197692e4631fd894a3ba275da1",
+      "sha256": "29001d967ad290e28f6f1d7d47e07e314354bf67d3b1f494e936fa2fed9a9122"
+    }
+  ]
+}

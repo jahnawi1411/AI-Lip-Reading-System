@@ -1,0 +1,4 @@
+# Part 1 does not require TensorFlow. Install in its own virtual environment.
+numpy>=2.0,<3
+opencv-contrib-python>=4.10,<6
+mediapipe>=0.10.30,<2

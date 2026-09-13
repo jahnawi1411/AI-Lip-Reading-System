@@ -1,0 +1,5 @@
+[
+  {"sequence": "../data/prepared/speaker01/clip01/sequence.npz", "text": "hello", "speaker": "speaker01", "split": "train"},
+  {"sequence": "../data/prepared/speaker02/clip01/sequence.npz", "text": "hello", "speaker": "speaker02", "split": "validation"},
+  {"sequence": "../data/prepared/speaker03/clip01/sequence.npz", "text": "hello", "speaker": "speaker03", "split": "test"}
+]
