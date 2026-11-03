@@ -24,3 +24,16 @@
 !models/lipnet-reference/
 !models/lipnet-reference/unseen-weights178.h5
 !models/lipnet-reference/LICENSE
+
+!requirements-audio.txt
+!audiovisual.py
+!setup_audio.py
+!general_lipreading.py
+!vendor/
+!vendor/auto_avsr/
+!vendor/auto_avsr/**
+!models/auto-avsr/
+!models/auto-avsr/vsr_trlrs2lrs3vox2avsp_base.pth
+!models/auto-avsr/PROVENANCE.json
+!deployment_preflight.py
+!setup_general_model.py

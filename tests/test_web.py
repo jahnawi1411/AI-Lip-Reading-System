@@ -27,7 +27,8 @@ class WebTests(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'VisionSpeak', response.data)
         self.assertIn("script-src 'self'", response.headers['Content-Security-Policy'])
-        self.assertIn('microphone=()', response.headers['Permissions-Policy'])
+        self.assertIn('microphone=(self)', response.headers['Permissions-Policy'])
+        self.assertIn(b'value="audio-video"', response.data)
         with self.client.get('/static/app.js') as asset:
             self.assertEqual(asset.status_code, 200)
 
@@ -56,6 +57,22 @@ class WebTests(unittest.TestCase):
         self.assertEqual(bob.delete('/api/v1/history/'+identifier, headers=bob_headers).status_code, 404)
         self.assertEqual(self.client.delete('/api/v1/history/'+identifier, headers=headers).status_code, 200)
         self.assertEqual(self.client.get('/api/v1/history').json['items'], [])
+
+    def test_words_and_expressions_saved_together_from_one_upload(self):
+        headers = self.register(self.client, 'combined')
+        result = {'text': 'hello', 'usable_text': 'hello', 'engine': 'original', 'audio_used': False}
+        shapes = {'samples': [{'time': 1, 'label': 'smiling lips', 'opening_ratio': .2}]}
+        with patch('lip_reader.get_model'), patch('preprocessing.LipDetector'), patch('recognition.recognize_file', return_value=result) as words, patch('audiovisual.expression_timeline', return_value=shapes) as expressions:
+            response = self.client.post('/api/v1/recognize', headers=headers,
+                data={'video': (io.BytesIO(b'test'), 'clip.mp4'), 'engine': 'original', 'start': '1', 'duration': '3'})
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(words.call_args.args[0], expressions.call_args.args[0])
+        self.assertEqual(expressions.call_args.args[1:], (1., 3.))
+        self.assertEqual(response.json['usable_text'], 'hello')
+        self.assertEqual(response.json['dominant_expression'], 'smiling lips')
+        saved = self.client.get('/api/v1/history').json['items'][0]['result']
+        self.assertEqual(saved['lip_expressions']['summary'], {'smiling lips': 1})
+        self.assertEqual(saved['usable_text'], 'hello')
 
     def test_webcam_validation_and_saved_result(self):
         headers = self.register(self.client, 'alice')

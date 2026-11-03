@@ -7,9 +7,10 @@
     "confidence_status": "uncalibrated",
     "decoder": "hybrid_ctc_attention",
     "domain": "English sentences (experimental)",
-    "elapsed_seconds": 8.162399899999855,
+    "dominant_expression": "closed lips",
+    "elapsed_seconds": 11.13782910000009,
     "engine": "auto-avsr",
-    "history_id": "8cb7950defb3436d8464e2309c435f3c",
+    "history_id": "cfa6b62a4aab4a2fb41d28b41fbd4ff3",
     "input_quality": {
       "assessment": "advisory",
       "mean_brightness": 143.2065887451172,
@@ -20,10 +21,205 @@
       "thresholds_calibrated": false,
       "warnings": []
     },
+    "lip_expressions": {
+      "description": "Visible lip gestures estimated from mouth movement: smiling, pouting, pursed, closed, slightly open or open. These labels do not identify emotions. Speech movements can resemble gestures; scores are not confidence probabilities.",
+      "detected_samples": 13,
+      "gesture_samples": 13,
+      "samples": [
+        {
+          "gesture_model_available": true,
+          "label": "slightly open lips",
+          "method": "mouth blendshapes + geometry",
+          "mouth_scores": {
+            "mouthFunnel": 0.0025,
+            "mouthPucker": 0.0009,
+            "mouthSmileLeft": 0.205,
+            "mouthSmileRight": 0.1531
+          },
+          "opening_label": "slightly open lips",
+          "opening_ratio": 0.133,
+          "time": 0.0
+        },
+        {
+          "gesture_model_available": true,
+          "label": "slightly open lips",
+          "method": "mouth blendshapes + geometry",
+          "mouth_scores": {
+            "mouthFunnel": 0.0027,
+            "mouthPucker": 0.001,
+            "mouthSmileLeft": 0.2825,
+            "mouthSmileRight": 0.2389
+          },
+          "opening_label": "slightly open lips",
+          "opening_ratio": 0.207,
+          "time": 0.2
+        },
+        {
+          "gesture_model_available": true,
+          "label": "slightly open lips",
+          "method": "mouth blendshapes + geometry",
+          "mouth_scores": {
+            "mouthFunnel": 0.014,
+            "mouthPucker": 0.2402,
+            "mouthSmileLeft": 0.0,
+            "mouthSmileRight": 0.0
+          },
+          "opening_label": "slightly open lips",
+          "opening_ratio": 0.127,
+          "time": 0.4
+        },
+        {
+          "gesture_model_available": true,
+          "label": "closed lips",
+          "method": "mouth blendshapes + geometry",
+          "mouth_scores": {
+            "mouthFunnel": 0.0007,
+            "mouthPucker": 0.0315,
+            "mouthSmileLeft": 0.0001,
+            "mouthSmileRight": 0.0001
+          },
+          "opening_label": "closed lips",
+          "opening_ratio": 0.011,
+          "time": 0.6
+        },
+        {
+          "gesture_model_available": true,
+          "label": "slightly open lips",
+          "method": "mouth blendshapes + geometry",
+          "mouth_scores": {
+            "mouthFunnel": 0.0209,
+            "mouthPucker": 0.0228,
+            "mouthSmileLeft": 0.2557,
+            "mouthSmileRight": 0.2485
+          },
+          "opening_label": "slightly open lips",
+          "opening_ratio": 0.177,
+          "time": 0.8
+        },
+        {
+          "gesture_model_available": true,
+          "label": "open mouth",
+          "method": "mouth blendshapes + geometry",
+          "mouth_scores": {
+            "mouthFunnel": 0.0144,
+            "mouthPucker": 0.0196,
+            "mouthSmileLeft": 0.4189,
+            "mouthSmileRight": 0.4788
+          },
+          "opening_label": "open mouth",
+          "opening_ratio": 0.293,
+          "time": 1.0
+        },
+        {
+          "gesture_model_available": true,
+          "label": "closed lips",
+          "method": "mouth blendshapes + geometry",
+          "mouth_scores": {
+            "mouthFunnel": 0.0014,
+            "mouthPucker": 0.2093,
+            "mouthSmileLeft": 0.0,
+            "mouthSmileRight": 0.0
+          },
+          "opening_label": "closed lips",
+          "opening_ratio": 0.011,
+          "time": 1.2
+        },
+        {
+          "gesture_model_available": true,
+          "label": "closed lips",
+          "method": "mouth blendshapes + geometry",
+          "mouth_scores": {
+            "mouthFunnel": 0.0058,
+            "mouthPucker": 0.2185,
+            "mouthSmileLeft": 0.0,
+            "mouthSmileRight": 0.0
+          },
+          "opening_label": "closed lips",
+          "opening_ratio": 0.074,
+          "time": 1.4
+        },
+        {
+          "gesture_model_available": true,
+          "label": "slightly open lips",
+          "method": "mouth blendshapes + geometry",
+          "mouth_scores": {
+            "mouthFunnel": 0.0106,
+            "mouthPucker": 0.01,
+            "mouthSmileLeft": 0.2141,
+            "mouthSmileRight": 0.2663
+          },
+          "opening_label": "slightly open lips",
+          "opening_ratio": 0.216,
+          "time": 1.6
+        },
+        {
+          "gesture_model_available": true,
+          "label": "closed lips",
+          "method": "mouth blendshapes + geometry",
+          "mouth_scores": {
+            "mouthFunnel": 0.0009,
+            "mouthPucker": 0.0008,
+            "mouthSmileLeft": 0.038,
+            "mouthSmileRight": 0.0397
+          },
+          "opening_label": "closed lips",
+          "opening_ratio": 0.056,
+          "time": 1.8
+        },
+        {
+          "gesture_model_available": true,
+          "label": "closed lips",
+          "method": "mouth blendshapes + geometry",
+          "mouth_scores": {
+            "mouthFunnel": 0.0001,
+            "mouthPucker": 0.0003,
+            "mouthSmileLeft": 0.003,
+            "mouthSmileRight": 0.0031
+          },
+          "opening_label": "closed lips",
+          "opening_ratio": 0.002,
+          "time": 2.0
+        },
+        {
+          "gesture_model_available": true,
+          "label": "closed lips",
+          "method": "mouth blendshapes + geometry",
+          "mouth_scores": {
+            "mouthFunnel": 0.0001,
+            "mouthPucker": 0.0005,
+            "mouthSmileLeft": 0.0021,
+            "mouthSmileRight": 0.0018
+          },
+          "opening_label": "closed lips",
+          "opening_ratio": 0.001,
+          "time": 2.2
+        },
+        {
+          "gesture_model_available": true,
+          "label": "closed lips",
+          "method": "mouth blendshapes + geometry",
+          "mouth_scores": {
+            "mouthFunnel": 0.0001,
+            "mouthPucker": 0.0017,
+            "mouthSmileLeft": 0.0005,
+            "mouthSmileRight": 0.0005
+          },
+          "opening_label": "closed lips",
+          "opening_ratio": 0.005,
+          "time": 2.4
+        }
+      ],
+      "summary": {
+        "closed lips": 7,
+        "open mouth": 1,
+        "slightly open lips": 5
+      },
+      "total_samples": 13
+    },
     "message": "Experimental visual-only English candidate. Review every word, especially names.",
     "model_revision": "182b62837773ab01052d4ac21ef1d2203ea7d267",
     "model_score": null,
-    "request_id": "44f02f2485b0460f822fe3def0eff023",
+    "request_id": "e1864321edcd4a85a60655963b4b59ea",
     "review_required": true,
     "source_label": "clip.mpg",
     "status": "decoded",
@@ -50,9 +246,9 @@
     "confidence_status": "uncalibrated",
     "decoder": "hybrid_ctc_attention",
     "domain": "English sentences (experimental)",
-    "elapsed_seconds": 8.442035900000064,
+    "elapsed_seconds": 3.2276003999995737,
     "engine": "auto-avsr",
-    "history_id": "f05ffc3e920c48a59b1868266a7e09f1",
+    "history_id": "fe04959837e54d0cb4d97a5e371240b4",
     "input_quality": {
       "assessment": "advisory",
       "mean_brightness": 142.47581481933594,
@@ -66,7 +262,7 @@
     "message": "Experimental visual-only English candidate. Review every word, especially names.",
     "model_revision": "182b62837773ab01052d4ac21ef1d2203ea7d267",
     "model_score": null,
-    "request_id": "a08501a7a67e4462b139b8ba00985c10",
+    "request_id": "161a2ed67a3d4e2394792a19747e4fa3",
     "review_required": true,
     "source_label": "Webcam capture",
     "status": "decoded",

@@ -2,6 +2,7 @@ __pycache__/
 .venv/
 .venv-general/
 models/auto-avsr/
+models/whisper/
 instance/
 outputs/
 models/face_landmarker.task

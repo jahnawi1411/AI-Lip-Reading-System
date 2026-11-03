@@ -65,7 +65,7 @@ def create_app(overrides=None):
         response.headers["Cache-Control"] = "no-store"
         response.headers["X-Content-Type-Options"] = "nosniff"
         response.headers["Content-Security-Policy"] = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' blob: data:; media-src 'self' blob:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
-        response.headers["Permissions-Policy"] = "camera=(self), microphone=()"
+        response.headers["Permissions-Policy"] = "camera=(self), microphone=(self)"
         response.headers["Referrer-Policy"] = "same-origin"
         app.logger.info("request_id=%s method=%s path=%s status=%s elapsed_ms=%.0f",
                         g.request_id, request.method, request.path, response.status_code,
@@ -112,12 +112,12 @@ def create_app(overrides=None):
             if upload is None or not upload.filename:
                 return jsonify(error="missing_video"), 400
             extension = Path(upload.filename).suffix.lower()
-            if extension not in {".mp4", ".mpg", ".mpeg", ".avi"}:
+            if extension not in {".mp4", ".mpg", ".mpeg", ".avi", ".webm"}:
                 return jsonify(error="unsupported_format"), 400
             mode = request.form.get("mode", "mediapipe")
             decoder = request.form.get("decoder", "greedy")
             engine = request.form.get('engine', 'original')
-            if engine not in {'original', 'lipnet-reference', 'auto-avsr'} or (engine != 'original' and mode != 'mediapipe'):
+            if engine not in {'original', 'lipnet-reference', 'auto-avsr', 'audio-video', 'lip-expression'} or (engine != 'original' and mode != 'mediapipe'):
                 return jsonify(error='invalid_options', message='The selected model requires automatic lip detection.'), 400
             if mode not in {"mediapipe", "grid"} or decoder not in {"greedy", "beam"}:
                 return jsonify(error="invalid_options"), 400
@@ -130,7 +130,28 @@ def create_app(overrides=None):
             with tempfile.TemporaryDirectory(prefix="visionspeak-", dir=app.config["UPLOAD_ROOT"]) as directory:
                 video_path = Path(directory) / ("input" + extension)
                 upload.save(video_path)
-                warmup()
+                if engine == 'lip-expression':
+                    from audiovisual import recognize_expressions
+                    try:
+                        result = recognize_expressions(video_path, start, duration)
+                    except ValueError as exc:
+                        return jsonify(error='invalid_video', message=str(exc)), 422
+                    except RuntimeError as exc:
+                        return jsonify(error='expression_unavailable', message=str(exc)), 503
+                    result['request_id'] = g.request_id
+                    return jsonify(app.extensions['save_result'](result, Path(upload.filename.replace('\\', '/')).name))
+                if engine == 'audio-video':
+                    from audiovisual import recognize_audiovisual
+                    try:
+                        result = recognize_audiovisual(video_path, start, duration)
+                    except ValueError as exc:
+                        return jsonify(error='invalid_video', message=str(exc)), 422
+                    except RuntimeError as exc:
+                        return jsonify(error='audio_unavailable', message=str(exc)), 503
+                    result['request_id'] = g.request_id
+                    return jsonify(app.extensions['save_result'](result, Path(upload.filename.replace('\\', '/')).name))
+                if engine != 'auto-avsr':
+                    warmup()
                 from recognition import recognize_file
                 try:
                     if engine == 'auto-avsr':
@@ -146,6 +167,8 @@ def create_app(overrides=None):
                                                 decoder=decoder, start=start, duration=duration, engine=engine)
                 except ValueError:
                     return jsonify(error="invalid_video", message="Check video format, visible face, frame count and selected interval."), 422
+                from audiovisual import attach_lip_expressions
+                attach_lip_expressions(result, video_path, start, duration)
             # Do not disclose server filesystem paths or image geometry to clients.
             response = {key: value for key, value in result.items()
                         if key not in {"source", "weights", "input_report"}}

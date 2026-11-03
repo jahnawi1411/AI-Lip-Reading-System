@@ -87,3 +87,21 @@ source licensing alone does not establish unrestricted commercial model rights.
   Container/hosted deployment of the sentence engine is not yet validated.
 
 See `REQUIREMENTS_STATUS.md` for the complete acceptance record.
+
+## Worker reuse update
+
+The web bridge now keeps one isolated sentence worker and its loaded model alive
+across requests. The first request still pays startup and model-loading costs.
+Requests are serialized, retain the 180-second timeout, and kill the worker on
+failure or timeout so the next request can start fresh. Application exit closes
+the worker. Model memory remains allocated while the application runs; video
+frames and transcripts are not cached. CPU inference itself still takes time.
+The browser defaults to English sentences when installed; GRID and the original
+checkpoint are available through Research settings only.
+
+Verification: two consecutive bridge calls on `data/public_regression/sbia1a.mpg`
+returned `SET BLUE IN A1 AGAIN` with the same worker process. Wall time was
+32.76 seconds cold and 6.32 seconds warm on this run, including bridge overhead.
+This is one local timing check, not a general performance guarantee. Explicit
+worker shutdown completed cleanly. The 66-test regression suite passed; the
+additional service test verifies English inference skips original-model loading.

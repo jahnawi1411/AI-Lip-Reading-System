@@ -113,7 +113,7 @@ def recognize_frames(frames, weights=None, mode="prepared", decoder="greedy", be
     result["review_required"] = True
     result["usable_text"] = result["text"] if result["status"] == "decoded" else None
     result["message"] = ("Candidate text needs review." if result["usable_text"] else
-                         "Could not reliably recognize speech from this clip.")
+                         "This original checkpoint failed the recorded reference tests. Use English sentences for everyday speech; this result does not establish a problem with your recording.")
     result["review_reasons"] = ["This checkpoint has no verified accuracy for this input."]
     if result["status"] != "decoded":
         result["review_reasons"].append("The output contains unknown tokens or no decoded speech.")

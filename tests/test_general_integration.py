@@ -6,7 +6,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from general_bridge import available
+from general_bridge import available, _stop_worker
 
 ROOT = Path(__file__).resolve().parents[1]
 VIDEO = ROOT/'data/public_regression/sbia1a.mpg'
@@ -15,6 +15,7 @@ VIDEO = ROOT/'data/public_regression/sbia1a.mpg'
 @unittest.skipUnless(available() and VIDEO.exists(), 'Install optional sentence model and public samples')
 class GeneralIntegrationTests(unittest.TestCase):
     def test_real_upload_camera_and_history(self):
+        self.addCleanup(_stop_worker, True)
         import cv2
         from service import create_app
         with tempfile.TemporaryDirectory() as directory:

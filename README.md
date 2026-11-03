@@ -1,6 +1,6 @@
 # VisionSpeak — AI Lip Reading System
 
-A complete browser application for visual-only speech-recognition experiments,
+A browser application for visual-only speech-recognition experiments,
 using Python, TensorFlow, OpenCV, MediaPipe, Flask, HTML, CSS and JavaScript.
 
 ## Start
@@ -20,6 +20,26 @@ See [PROJECT_GUIDE.md](PROJECT_GUIDE.md) for upload, webcam, live lip detection,
 prediction history, export/delete, test instructions and deployment status.
 
 ## Features
+
+The studio offers two main features:
+
+1. **Lip reading with or without sound.** With sound, local Whisper transcribes
+   the audio and shows word timestamps alongside lip shapes. Without sound,
+   select an existing visual speech model (English sentences when installed,
+   GRID commands, or the original comparison model). Audio mode is transcription,
+   not a fused audio/visual speech model.
+2. **Lip expression recognition.** Select this feature to analyze uploaded video
+   or a silent webcam recording independently of speech models. Results show the
+   most observed shape and a timeline of smiling lips, pouting lips, pursed lips, closed lips, slightly open
+   lips and open mouth. Labels combine mouth movement model outputs with geometric
+   measurements; they are estimates of visible gestures, not emotions.
+   Audio is ignored and no microphone permission is required.
+
+Both features support saved results, history and JSON download. Expression
+analysis needs the existing MediaPipe face model, supports up to 300 seconds per
+upload selection, and reports missing faces instead of guessing.
+
+Other current features:
 
 - Video upload with automatic lip detection or original GRID framing.
 - Camera-only capture, live lip-region preview and repeated short recognition cycles.
@@ -62,3 +82,19 @@ Local state is stored under ignored `instance/`; data and outputs are also ignor
 Raw video and webcam images are removed after processing. Only result records are
 retained in history. [DEPLOYMENT.md](DEPLOYMENT.md) describes production secrets,
 HTTPS, shared database, backups, scaling and unverified deployment checks.
+# New: video + audio and lip expressions
+
+The studio now supports spoken-word transcription from uploaded videos or camera
+recordings with microphone audio, plus a lip-shape timeline. See
+[AUDIO_FEATURES.md](AUDIO_FEATURES.md) for setup and use. Existing visual models
+remain available for silent video. Earlier visual-only notes below describe those
+models.
+
+## Evaluation and deployment release checks
+
+Use [EVALUATION.md](EVALUATION.md) to evaluate the actual English model with
+labelled video, WER/CER, failure accounting and reproducible model hashes.
+Audio transcription results must be reported separately from lip-reading.
+[DEPLOYMENT.md](DEPLOYMENT.md) contains the updated full-model image procedure
+and the remaining Linux/HTTPS checks. A successful local test is not a hosted
+release or evidence of general conversational accuracy.

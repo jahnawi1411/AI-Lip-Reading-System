@@ -20,6 +20,15 @@ class ServiceTests(unittest.TestCase):
     def upload(self, name="sample.mp4", content=b"test"):
         return self.client.post("/api/v1/recognize", data={"video": (io.BytesIO(content), name)}, headers=self.headers)
 
+    def test_english_engine_does_not_load_original_checkpoint(self):
+        result = {'engine': 'auto-avsr', 'text': 'hello', 'usable_text': 'hello', 'audio_used': False}
+        with patch('general_bridge.available', return_value=True), patch('general_bridge.recognize_general', return_value=result), patch('lip_reader.get_model', side_effect=AssertionError('Unrelated model loaded')), patch('audiovisual.attach_lip_expressions'):
+            response = self.client.post('/api/v1/recognize', headers=self.headers,
+                data={'video': (io.BytesIO(b'test'), 'clip.mp4'), 'engine': 'auto-avsr'})
+        self.assertEqual(response.status_code, 200, response.json)
+        self.assertEqual(response.json['text'], 'hello')
+        self.assertEqual(list(Path(self.directory.name).iterdir()), [])
+
     def test_production_requires_secret(self):
         with self.assertRaises(ValueError):
             create_app({"ENVIRONMENT": "production", "API_TOKEN": ""})

@@ -173,7 +173,7 @@ def install_web(app, slot, warmup):
             from preprocessing import DEFAULT_MODEL, crop_lips
             if preview_detector is None:
                 preview_detector = mp.tasks.vision.FaceLandmarker.create_from_options(
-                    mp.tasks.vision.FaceLandmarkerOptions(base_options=mp.tasks.BaseOptions(model_asset_path=str(DEFAULT_MODEL)), num_faces=2))
+                    mp.tasks.vision.FaceLandmarkerOptions(base_options=mp.tasks.BaseOptions(model_asset_path=str(DEFAULT_MODEL)), num_faces=2, output_face_blendshapes=True))
             try:
                 body = request.get_json(silent=True) or {}
                 if not isinstance(body, dict):
@@ -183,7 +183,10 @@ def install_web(app, slot, warmup):
                 if len(detected.face_landmarks) != 1:
                     return jsonify(box=None, message="Keep exactly one face in view.")
                 _, box = crop_lips(frame, detected.face_landmarks[0])
-                return jsonify(box=box, width=frame.shape[1], height=frame.shape[0], message="Lips detected")
+                from audiovisual import lip_expression
+                shapes = detected.face_blendshapes[0] if detected.face_blendshapes else []
+                expression = lip_expression(detected.face_landmarks[0], frame.shape[1], frame.shape[0], shapes)
+                return jsonify(box=box, width=frame.shape[1], height=frame.shape[0], expression=expression, message=expression['label'])
             except (ValueError, OSError):
                 return jsonify(box=None, message="Center your face and keep your lips visible.")
         finally:

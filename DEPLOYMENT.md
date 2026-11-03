@@ -1,6 +1,54 @@
+# Deployment release status — 19 October 2026
+
+The container recipe now packages the English sentence worker, its isolated CPU
+PyTorch environment, vendored inference code and local checkpoint. It also
+includes the audio/expression module and dependencies. Whisper weights download
+during image build, so a normal audio request does not have to install them.
+Only explicitly allowed source/model assets enter the Docker build context;
+accounts, personal videos, local databases and secrets remain excluded.
+
+**Not yet release-verified:** Docker is unavailable on the development machine.
+The Linux dependency installation, image startup, PostgreSQL integration and
+public HTTPS camera flow must pass before calling this production-ready.
+Local Windows tests do not establish Linux compatibility. All 70 test cases
+report OK, but the full Windows runner exits nonzero during final teardown;
+resolve this before treating the suite as a release gate.
+
+## Build and release procedure
+
+1. Run `python deployment_preflight.py` to verify required files, the pinned
+   English model hash and all vendored source hashes. Ensure the local models exist: `models/auto-avsr/` (checkpoint and
+   provenance), `models/face_landmarker.task`, original weights and LipNet weights.
+   Run the documented setup scripts if missing. The image build needs network
+   access to package indexes and the audio model download service.
+2. On a Docker host, copy `.env.example` to a private `.env` and supply distinct,
+   randomly generated API/session secrets and a database password. Never commit it.
+3. Run `docker compose config --quiet`, then `docker compose build --pull`.
+   Resolve any Linux dependency errors before continuing; do not silently loosen pins.
+4. Run `docker compose up -d`; inspect `docker compose logs web`. Check
+   `http://127.0.0.1:8080/health/ready` on the host.
+5. Put an HTTPS reverse proxy in front of localhost port 8080. Keep the database
+   private. Allow at least 240 seconds for inference responses at the proxy.
+6. Test registration, login, an English upload twice, audio transcription,
+   expression-only mode and webcam permission using the public HTTPS URL.
+   Check that results state whether words came from video or sound.
+7. Restart the containers and verify account/history persistence. Test a database
+   backup and restore. Measure peak RAM and cold/warm latency on the actual host.
+8. Send overlapping requests: one should run while the other gets HTTP 429 with
+   Retry-After. The current app has bounded concurrency, not a background queue.
+
+Compose defaults to a configurable 8 GiB memory cap and four CPUs for the web
+service. These are provisional limits, not measured minimum hardware requirements.
+Set `WEB_MEMORY_LIMIT` and `WEB_CPU_LIMIT` after measurement. Persistent model
+reuse trades additional resident RAM for lower repeat-request latency.
+An online endpoint still needs a hosting account; none has been created.
+
+---
+
 # VisionSpeak deployment and scaling
 
-Model update: run `python fetch_reference_model.py` before building the image.
+Historical reference-model deployment notes (superseded by the release procedure above):
+run `python fetch_reference_model.py` before building the image.
 The image now includes the public reference weights and their MIT license.
 `VISIONSPEAK_REFERENCE_WEIGHTS` can override their runtime path. Original API
 requests retain the original engine unless `engine=lipnet-reference` is supplied.

@@ -33,16 +33,18 @@ def crop_lips(frame, landmarks):
 
 class LipDetector:
     """One detector per clip, with increasing timestamps in milliseconds."""
-    def __init__(self, model_path=DEFAULT_MODEL, cropper=crop_lips):
+    def __init__(self, model_path=DEFAULT_MODEL, cropper=crop_lips, include_blendshapes=False):
         if not Path(model_path).is_file():
             raise FileNotFoundError("Face model missing. Run: python prepare_video.py --download-model")
         import mediapipe as mp
         self.mp = mp
         self.cropper = cropper
+        self.include_blendshapes = include_blendshapes
         options = mp.tasks.vision.FaceLandmarkerOptions(
             base_options=mp.tasks.BaseOptions(model_asset_path=str(model_path)),
             running_mode=mp.tasks.vision.RunningMode.VIDEO,
             num_faces=2,
+            output_face_blendshapes=include_blendshapes,
         )
         self.detector = mp.tasks.vision.FaceLandmarker.create_from_options(options)
 
@@ -52,6 +54,9 @@ class LipDetector:
             self.mp.Image(image_format=self.mp.ImageFormat.SRGB, data=rgb), timestamp_ms)
         if len(result.face_landmarks) != 1:
             raise ValueError("Exactly one visible face is required in every sampled frame.")
+        if self.include_blendshapes:
+            shapes = result.face_blendshapes[0] if result.face_blendshapes else []
+            return self.cropper(frame, result.face_landmarks[0], shapes)
         return self.cropper(frame, result.face_landmarks[0])
 
     def __enter__(self):

@@ -1,5 +1,6 @@
 """Local visual-only Auto-AVSR adapter; no audio or transcript enters inference."""
 import argparse
+from functools import lru_cache
 import json
 import sys
 import time
@@ -94,17 +95,13 @@ def prepare_sentence(path, start=0.0, duration=None):
         'warnings':['Face Landmarker anchors replace the upstream face detector; this adaptation needs representative evaluation.']}
 
 
-def recognize_sentence(path, start=0.0, duration=None, beam_size=10):
+@lru_cache(maxsize=1)
+def load_sentence_model():
+    """Keep the verified model in memory for successive worker requests."""
     import torch
-    if not 1 <= beam_size <= 40:
-        raise ValueError('Beam size must be between 1 and 40.')
-    sys.path.insert(0, str(VENDOR)) if str(VENDOR) not in sys.path else None
+    if str(VENDOR) not in sys.path:
+        sys.path.insert(0, str(VENDOR))
     from espnet.nets.pytorch_backend.e2e_asr_conformer import E2E
-    from espnet.nets.batch_beam_search import BatchBeamSearch
-    from espnet.nets.scorers.length_bonus import LengthBonus
-    torch.set_num_threads(4)
-    started = time.perf_counter()
-    frames, report = prepare_sentence(path,start,duration)
     units = (VENDOR/'spm/unigram/unigram5000_units.txt').read_text(encoding='utf-8').splitlines()
     tokens = ['<blank>'] + [line.split()[0] for line in units] + ['<eos>']
     # Only tensor state is accepted: never fall back to unrestricted pickle loading.
@@ -113,6 +110,20 @@ def recognize_sentence(path, start=0.0, duration=None, beam_size=10):
     model.load_state_dict(state, strict=True)
     del state
     provenance = json.loads((WEIGHTS.parent/'PROVENANCE.json').read_text(encoding='utf-8'))
+    return model, tokens, provenance
+
+
+def recognize_sentence(path, start=0.0, duration=None, beam_size=10):
+    import torch
+    if not 1 <= beam_size <= 40:
+        raise ValueError('Beam size must be between 1 and 40.')
+    sys.path.insert(0, str(VENDOR)) if str(VENDOR) not in sys.path else None
+    from espnet.nets.batch_beam_search import BatchBeamSearch
+    from espnet.nets.scorers.length_bonus import LengthBonus
+    torch.set_num_threads(4)
+    started = time.perf_counter()
+    frames, report = prepare_sentence(path,start,duration)
+    model, tokens, provenance = load_sentence_model()
     scorers = model.scorers()
     scorers.update(lm=None,length_bonus=LengthBonus(len(tokens)))
     search = BatchBeamSearch(beam_size=beam_size,vocab_size=len(tokens),
@@ -139,7 +150,27 @@ def recognize_sentence(path, start=0.0, duration=None, beam_size=10):
     return result
 
 
+def serve_worker():
+    # Stdout is the JSON protocol; library diagnostics belong on stderr.
+    from contextlib import redirect_stdout
+    output = sys.stdout
+    for line in sys.stdin:
+        try:
+            request = json.loads(line)
+            with redirect_stdout(sys.stderr):
+                result = recognize_sentence(request['path'], request['start'], request['duration'])
+            response = {'result': result}
+        except Exception:
+            response = {'error': 'Sentence recognition failed. Use a short clip with one clear, centered face.'}
+        output.write(json.dumps(response) + '\n')
+        output.flush()
+        response = request = result = line = None
+
+
 if __name__ == '__main__':
+    if sys.argv[1:] == ['--worker']:
+        serve_worker()
+        sys.exit(0)
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('video',type=Path)
     parser.add_argument('--start',type=float,default=0.)
